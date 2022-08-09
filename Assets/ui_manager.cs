@@ -6,10 +6,11 @@ public class ui_manager : MonoBehaviour
 {
     public RectTransform settings;
     public RectTransform main;
+    public RectTransform _canvas;
 
-    public Vector2 mainPosition = new Vector2(0, 0);
-    public Vector2 settingsPosition = new Vector2(925f, 0f);
-    public float movedPosition = 925f;
+    private Vector2 mainPosition = new Vector2(0, 0);
+    private Vector2 settingsPosition;
+    private float movedPosition = 925f;
     public float midlePosition = 0f;
 
     // Time taken for the transition.
@@ -20,35 +21,30 @@ public class ui_manager : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
+        settings.offsetMax = settings.offsetMin = new Vector2(_canvas.rect.width, 0f);
+        settingsPosition = new Vector2(_canvas.rect.width, 0f);
     }
 
     // Update is called once per frame
     void Update()
     {
         float t = (Time.time - startTime) / duration;
-        // setLeft(main, Mathf.SmoothStep(main.offsetMin.x, mainPosition, t));
-        // Debug.Log(Mathf.SmoothStep(settings.offsetMin.x, settingsPosition, t));
-        // setLeft(settings, Mathf.SmoothStep(settings.offsetMin.x, settingsPosition, t));
-
-
 
         settings.offsetMax = settings.offsetMin = Vector2.Lerp(settings.offsetMin, settingsPosition, t);
         main.offsetMax = main.offsetMin = Vector2.Lerp(main.offsetMin, mainPosition, t);
-        // settings.offsetMax = new Vector2(Mathf.SmoothStep(settings.offsetMin.x, settingsPosition, t), settings.offsetMax.y);
     }
 
     public void open_settings()
     {
-
-        mainPosition = new Vector2(-movedPosition, 0f);
+        startTime = Time.time;
+        mainPosition = new Vector2(-_canvas.rect.width, 0f);
         settingsPosition = new Vector2(midlePosition, 0f);
-
-        Debug.Log("open settings " + Screen.width);
     }
 
-    private void setLeft(RectTransform obj, float left)
+    public void open_menu()
     {
-        obj.offsetMin = new Vector2(left, 0);
-        obj.offsetMax = new Vector2(left, 0);
+        startTime = Time.time;
+        mainPosition = new Vector2(midlePosition, 0f);
+        settingsPosition = new Vector2(_canvas.rect.width, 0f);
     }
 }
