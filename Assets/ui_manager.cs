@@ -22,6 +22,10 @@ public class ui_manager : MonoBehaviour
     // Time taken for the transition.
     public float duration = 50f;
 
+    public AudioSource buttonClick;
+    public AudioSource mainMusic;
+    public AudioSource settingsMusic;
+
     float startTime;
     // Start is called before the first frame update
     void Start()
@@ -42,6 +46,9 @@ public class ui_manager : MonoBehaviour
 
     public void open_settings()
     {
+        buttonClick.Play();
+        mainMusic.Stop();
+        settingsMusic.Play();
         startTime = Time.time;
         mainPosition = new Vector2(-_canvas.rect.width, 0f);
         settingsPosition = new Vector2(midlePosition, 0f);
@@ -50,6 +57,9 @@ public class ui_manager : MonoBehaviour
 
     public void open_menu()
     {
+        buttonClick.Play();
+        mainMusic.Play();
+        settingsMusic.Stop();
         startTime = Time.time;
         mainPosition = new Vector2(midlePosition, 0f);
         settingsPosition = new Vector2(_canvas.rect.width, 0f);
