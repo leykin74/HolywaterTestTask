@@ -47,7 +47,7 @@ public class ui_manager : MonoBehaviour
 
     public void open_settings()
     {
-        buttomClick();
+        buttonClickPlaySound();
         switchMusic(false);
         startTime = Time.time;
         mainPosition = new Vector2(-_canvas.rect.width, 0f);
@@ -57,7 +57,7 @@ public class ui_manager : MonoBehaviour
 
     public void open_menu()
     {
-        buttomClick();
+        buttonClickPlaySound();
         switchMusic(true);
         startTime = Time.time;
         mainPosition = new Vector2(midlePosition, 0f);
@@ -87,12 +87,11 @@ public class ui_manager : MonoBehaviour
                 settingsMusic.Play();
             }
         } else {
-            mainMusic.Stop();
-            settingsMusic.Stop();
+            stopMusic();
         }
     }
 
-    private void buttomClick()
+    private void buttonClickPlaySound()
     {
         if (soundOn) buttonClick.Play();
     }
@@ -106,5 +105,21 @@ public class ui_manager : MonoBehaviour
     {
         musicOn = !musicOn;
         switchMusic(false);
+    }
+
+    private void stopMusic() {
+        mainMusic.Stop();
+        settingsMusic.Stop();
+    }
+
+    public void playBtnClicked() {
+        buttonClickPlaySound();
+        menuButtonsOnOff(false);
+        stopMusic();
+
+        foreach (var _animator in getAllButtons.Animators)
+        {
+            _animator.SetBool("fadeOut", true);
+        }
     }
 }
