@@ -8,8 +8,6 @@ public class ui_manager : MonoBehaviour
     public GameObject settings_go;
     public GameObject main_go;
     public RectTransform _canvas;
-    // public Button playBtn;
-    // public Button settingsBtn;
     public RectTransform main;
     public RectTransform settings;
 
@@ -25,6 +23,9 @@ public class ui_manager : MonoBehaviour
     public AudioSource buttonClick;
     public AudioSource mainMusic;
     public AudioSource settingsMusic;
+
+    public bool musicOn = true;
+    public bool soundOn = true;
 
     float startTime;
     // Start is called before the first frame update
@@ -46,9 +47,8 @@ public class ui_manager : MonoBehaviour
 
     public void open_settings()
     {
-        buttonClick.Play();
-        mainMusic.Stop();
-        settingsMusic.Play();
+        buttomClick();
+        switchMusic(false);
         startTime = Time.time;
         mainPosition = new Vector2(-_canvas.rect.width, 0f);
         settingsPosition = new Vector2(midlePosition, 0f);
@@ -57,9 +57,8 @@ public class ui_manager : MonoBehaviour
 
     public void open_menu()
     {
-        buttonClick.Play();
-        mainMusic.Play();
-        settingsMusic.Stop();
+        buttomClick();
+        switchMusic(true);
         startTime = Time.time;
         mainPosition = new Vector2(midlePosition, 0f);
         settingsPosition = new Vector2(_canvas.rect.width, 0f);
@@ -68,11 +67,44 @@ public class ui_manager : MonoBehaviour
 
     private void menuButtonsOnOff(bool onOff)
     {
-        // playBtn.interactable = onOff;
-        // settingsBtn.interactable = onOff;
         foreach (var item in getAllButtons.Buttons)
         {
             item.interactable = onOff;
         }
+    }
+
+    private void switchMusic(bool onOff)
+    {
+        if (musicOn) {
+            if (onOff)
+            {
+                mainMusic.Play();
+                settingsMusic.Stop();
+            }
+            else
+            {
+                mainMusic.Stop();
+                settingsMusic.Play();
+            }
+        } else {
+            mainMusic.Stop();
+            settingsMusic.Stop();
+        }
+    }
+
+    private void buttomClick()
+    {
+        if (soundOn) buttonClick.Play();
+    }
+
+    public void onSFXChange(bool onOff)
+    {
+        soundOn = !soundOn;
+    }
+
+    public void onMusicChange(bool onOff)
+    {
+        musicOn = !musicOn;
+        switchMusic(false);
     }
 }
