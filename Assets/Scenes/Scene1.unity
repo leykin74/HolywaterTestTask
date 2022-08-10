@@ -246,21 +246,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!111 &275164469
-Animation:
+--- !u!114 &275164469
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 275164467}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 506911ec6781684439dde8b8999eae39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Buttons: []
 --- !u!1 &379972319
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,9 +544,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96600c0ffde9bf54e95962b02f55fa45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 775416188}
-  main: {fileID: 275164468}
+  settings_go: {fileID: 775416187}
+  main_go: {fileID: 275164467}
   _canvas: {fileID: 765188315}
+  main: {fileID: 275164468}
+  settings: {fileID: 775416188}
+  getAllButtons: {fileID: 275164469}
   midlePosition: 0
   duration: 40
 --- !u!1 &775416187

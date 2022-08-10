@@ -1,16 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ui_manager : MonoBehaviour
 {
-    public RectTransform settings;
-    public RectTransform main;
+    public GameObject settings_go;
+    public GameObject main_go;
     public RectTransform _canvas;
+    // public Button playBtn;
+    // public Button settingsBtn;
+    public RectTransform main;
+    public RectTransform settings;
+
+    public getAllButtons getAllButtons;
 
     private Vector2 mainPosition = new Vector2(0, 0);
     private Vector2 settingsPosition;
-    private float movedPosition = 925f;
     public float midlePosition = 0f;
 
     // Time taken for the transition.
@@ -39,6 +45,7 @@ public class ui_manager : MonoBehaviour
         startTime = Time.time;
         mainPosition = new Vector2(-_canvas.rect.width, 0f);
         settingsPosition = new Vector2(midlePosition, 0f);
+        menuButtonsOnOff(false);
     }
 
     public void open_menu()
@@ -46,5 +53,16 @@ public class ui_manager : MonoBehaviour
         startTime = Time.time;
         mainPosition = new Vector2(midlePosition, 0f);
         settingsPosition = new Vector2(_canvas.rect.width, 0f);
+        menuButtonsOnOff(true);
+    }
+
+    private void menuButtonsOnOff(bool onOff)
+    {
+        // playBtn.interactable = onOff;
+        // settingsBtn.interactable = onOff;
+        foreach (var item in getAllButtons.Buttons)
+        {
+            item.interactable = onOff;
+        }
     }
 }
